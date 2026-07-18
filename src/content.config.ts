@@ -29,7 +29,7 @@ const home = defineCollection({
 });
 
 const work = defineCollection({
-  loader: glob({ pattern: '**/*.mdoc', base: './src/content/work' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/work' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
