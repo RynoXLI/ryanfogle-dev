@@ -1,0 +1,36 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+
+const homeEntry = await getEntry('home', 'home');
+const home = homeEntry?.data;
+const settingsEntry = await getEntry('settings', 'settings');
+const siteName = settingsEntry?.data.siteName ?? 'Ryan Fogle';
+---
+
+<Layout title={siteName}>
+	<Nav slot="nav" />
+
+	<section class="space-y-6 py-8">
+		<h1 class="font-serif text-4xl font-bold tracking-tight sm:text-5xl">{home?.heading ?? `Hi, I'm Ryan.`}</h1>
+		<p class="max-w-prose text-lg leading-relaxed text-stone-600 dark:text-stone-300">
+			{
+				home?.intro ??
+					`I'm a software engineer and data scientist working on generative AI in production. This is where I write, share projects, and keep an up-to-date record of my work.`
+			}
+		</p>
+		<div class="flex flex-wrap gap-3 pt-2">
+			{
+				(home?.ctas ?? []).map((cta) => (
+					<a
+						href={cta.href}
+						class="rounded-full border border-stone-300 px-5 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent dark:border-stone-700"
+					>
+						{cta.label}
+					</a>
+				))
+			}
+		</div>
+	</section>
+</Layout>

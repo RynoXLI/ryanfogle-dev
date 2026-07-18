@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { slug: project.id },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={project.data.title} description={project.data.description}>
+	<Nav slot="nav" />
+
+	<article class="prose prose-stone dark:prose-invert prose-headings:font-serif prose-a:text-accent max-w-none">
+		<h1>{project.data.title}</h1>
+		<p class="not-prose flex gap-4 text-sm">
+			{project.data.url && (
+				<a class="font-medium text-accent hover:underline" href={project.data.url}>
+					Live site
+				</a>
+			)}
+			{project.data.repo && (
+				<a class="font-medium text-accent hover:underline" href={project.data.repo}>
+					Source
+				</a>
+			)}
+		</p>
+		<Content />
+	</article>
+</Layout>

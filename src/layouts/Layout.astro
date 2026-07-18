@@ -1,0 +1,38 @@
+---
+import { getEntry } from 'astro:content';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const settingsEntry = await getEntry('settings', 'settings');
+const settings = settingsEntry?.data;
+
+const { title, description = settings?.defaultDescription ?? 'Personal site, blog, and project portfolio.' } =
+	Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen bg-stone-50 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
+		<div class="mx-auto flex min-h-screen max-w-2xl flex-col px-6">
+			<slot name="nav" />
+			<main class="flex-1 py-12">
+				<slot />
+			</main>
+			<footer class="border-t border-stone-200 py-8 text-xs text-stone-400 dark:border-stone-800 dark:text-stone-500">
+				&copy; {new Date().getFullYear()} {settings?.siteName ?? 'Ryan Fogle'} —{' '}
+				{settings?.footerText ?? 'Built with Astro & Keystatic.'}
+			</footer>
+		</div>
+	</body>
+</html>

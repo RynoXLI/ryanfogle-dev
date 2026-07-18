@@ -1,0 +1,12 @@
+heading: "Hi, I'm Ryan."
+intro: >-
+  I'm a software engineer and data scientist working on generative AI in
+  production. This is where I write, share projects, and keep an up-to-date
+  record of my work.
+ctas:
+  - label: Read my CV
+    href: /cv
+  - label: Visit the blog
+    href: /blog
+  - label: See my projects
+    href: /projects

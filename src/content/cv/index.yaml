@@ -1,0 +1,84 @@
+name: "Ryan S. Fogle"
+headline: "Senior Software Engineer and Data Scientist"
+email: "ryan@foglemail.com"
+location: "Chicago, IL"
+summary: >-
+  Senior Software Engineer and Data Scientist specializing in Generative AI
+  and Machine Learning. Focused on taking AI prototypes to production at
+  scale, building real-time, reliable systems that deliver measurable impact.
+links:
+  - label: GitHub
+    url: https://github.com/RynoXLI
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/ryan-scott-fogle/
+skills:
+  - GenAI
+  - Machine Learning
+  - Deep Learning
+  - NLP
+  - ETL
+  - Data Engineering
+  - Data Visualization
+  - Python
+  - Go
+  - SQL
+  - Snowflake
+  - AWS
+  - Azure
+  - LangChain
+  - Pandas
+  - Scikit-learn
+  - Streamlit
+  - NLTK
+  - MLFlow
+  - Transformers
+  - FastAPI
+  - PyTorch
+experience:
+  - role: "Senior Software Engineer | AI Assistant"
+    company: "Caterpillar, Inc."
+    startDate: "2025-06-01"
+    endDate:
+    description:
+      - "Designed and implemented the orchestration layer for the Caterpillar AI Assistant using LangChain, FastAPI and Server-Sent Events (SSE) to enable real-time, scalable interactions."
+      - "Developed and integrated Caterpillar enterprise APIs into a custom gRPC tools repository, ensuring seamless interoperability for AI Assistant consumption."
+      - "Collaborated across multiple technical and business domains, proactively identifying issues and realigning implementation strategies to maintain architectural integrity and performance."
+      - "Selected to represent Caterpillar at CES 2026, showcasing cutting-edge AI solutions to global industry leaders."
+  - role: "Senior Data Scientist | AI & Analytics Prototyping"
+    company: "Caterpillar, Inc."
+    startDate: "2024-08-01"
+    endDate: "2025-05-01"
+    description:
+      - "Developed a custom embedding model for integration into parts.cat.com, enabling semantic search capabilities and achieving a 25% improvement in search win rate."
+      - "Developed a RAG pipeline for service articles, designed to enhance complex querying and improve search results for sis2.cat.com, enabling quick, tailored AI-generated responses to user inquiries."
+      - "Built a RAG pipeline using LlamaIndex to generate dealer service articles for assembly and disassembly from factory line instructions, resulting in significant time savings in content creation."
+      - "Generated new part names and descriptions using an LLM and existing data to improve SEO for thousands of parts on parts.cat.com, intending to improve visibility and traffic."
+  - role: "Data Scientist | AI & Analytics Prototyping"
+    company: "Caterpillar, Inc."
+    startDate: "2023-02-01"
+    endDate: "2024-08-01"
+    description:
+      - "Led the development and fine-tuning of 32 machine translation models using Azure Custom Translator, customized for Caterpillar's terminology, achieving a notable decrease in multimillion-dollar translation costs."
+      - "Fine-tuned a multi-class BERT model using inspection questions, enabling component identification for 25% of annual machine inspections and improving business segmentation by reallocating over $350 million in revenue."
+      - "Spearheaded the development of a Streamlit proof-of-concept dashboard for machine translation, expediting project timelines. Garnered over 100 distinct user visits and gained visibility with executive leadership."
+      - "Orchestrated an automatic speech recognition pipeline for video caption generation and translation, slashing time-to-market for a multimillion-dollar marketing campaign from one month to three days, seizing lost opportunities."
+      - "Prompt engineered automated detection for additional machine inspections based on oil sample analysis recommendations, enabling near-immediate service events reviewable by condition monitoring analysts."
+  - role: "Data Scientist | IoT Analytics"
+    company: "Caterpillar, Inc."
+    startDate: "2021-06-01"
+    endDate: "2023-02-01"
+    description:
+      - "Trained a Random Forest model to classify machine failures using telematic fault codes, aimed at increasing condition monitoring offerings."
+      - "Developed a FastAPI backend and React frontend for ground truth labeling, facilitating future analytics models to predict machine failure and boost service revenue growth."
+      - "Created ETL data pipelines in Snowflake to automatically identify over 600k component replacements from telematics data, ensuring high-quality data for component service intervals."
+      - "Engineered a discrete event simulation engine record-keeping system for mine-site electrification, currently operational in production helping Caterpillar make critical electrification decisions."
+      - "Set up model lifecycle and experimentation pipeline (MLFlow) for team projects, enabling quick modeling iterations and progress tracking."
+education:
+  - school: "University of Illinois at Urbana-Champaign"
+    degree: "Master of Computer Science in Data Science"
+    startDate:
+    endDate:
+  - school: "University of Illinois at Urbana-Champaign"
+    degree: "Bachelor of Science in Agricultural Engineering"
+    startDate:
+    endDate:
