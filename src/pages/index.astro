@@ -17,7 +17,7 @@ const homeImages = import.meta.glob<{ default: ImageMetadata }>('../content/home
 const photo = home?.photo ? homeImages[`../content/home/images/${home.photo}`]?.default : undefined;
 ---
 
-<Layout title={siteName}>
+<Layout title={siteName} image={photo?.src}>
 	<Nav slot="nav" />
 
 	<section class="space-y-6">

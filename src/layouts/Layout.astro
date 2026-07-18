@@ -5,13 +5,24 @@ import '../styles/global.css';
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
+	type?: 'website' | 'article';
 }
 
 const settingsEntry = await getEntry('settings', 'settings');
 const settings = settingsEntry?.data;
+const siteName = settings?.siteName ?? 'Ryan Fogle';
 
-const { title, description = settings?.defaultDescription ?? 'Personal site, blog, and project portfolio.' } =
-	Astro.props;
+const {
+	title,
+	description = settings?.defaultDescription ?? 'Personal site and project portfolio.',
+	image,
+	type = 'website',
+} = Astro.props;
+
+const pageTitle = title === siteName ? title : `${title} | ${siteName}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = image ? new URL(image, Astro.site) : undefined;
 ---
 
 <html lang="en">
@@ -22,10 +33,23 @@ const { title, description = settings?.defaultDescription ?? 'Personal site, blo
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="canonical" href={canonicalURL} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{pageTitle}</title>
+
+		<meta property="og:type" content={type} />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		{ogImageURL && <meta property="og:image" content={ogImageURL} />}
+
+		<meta name="twitter:card" content={ogImageURL ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		{ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
 	</head>
 	<body class="min-h-screen bg-stone-50 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
 		<div class="mx-auto flex min-h-screen max-w-2xl flex-col px-6">

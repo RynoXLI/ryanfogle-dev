@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
+import sitemap from '@astrojs/sitemap';
 import keystatic from '@keystatic/astro';
 
 // Keystatic uses `storage: { kind: 'local' }` (see keystatic.config.ts), which
@@ -17,9 +18,11 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://ryanfogle.dev',
+
   vite: {
     plugins: [tailwindcss()]
   },
 
-  integrations: [react(), markdoc(), ...(isDev ? [keystatic()] : [])]
+  integrations: [react(), markdoc(), sitemap(), ...(isDev ? [keystatic()] : [])]
 });
