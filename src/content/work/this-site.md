@@ -7,9 +7,11 @@ tags:
   - sveltia-cms
   - typescript
   - cloudflare
-featured: true
+url: ''
 repo: https://github.com/RynoXLI/ryanfogle-dev
+featured: true
 ---
+
 This is my second personal site; the first was a Flask app on an EC2 box
 that billed me around the clock. This one is my home base for sharing
 projects and writing about what I'm building — and it costs me nothing to
@@ -17,10 +19,10 @@ run. Here's how it's put together.
 
 ## Stack
 
-- **[Astro](https://astro.build)** for static site generation. There's no
+- [**Astro**](https://astro.build) for static site generation. There's no
   server-side rendering here — every page is built to plain HTML at build
   time, which keeps things fast and simple to host.
-- **[Sveltia CMS](https://sveltiacms.app)** as a git-based CMS. It's a single
+- [**Sveltia CMS**](https://sveltiacms.app) as a git-based CMS. It's a single
   static admin page (`/admin`) that talks to the GitHub API directly, so I
   can edit content — this post included — from any browser, on any device,
   with changes committed straight to the repo. No server, no database.
@@ -31,8 +33,8 @@ run. Here's how it's put together.
 
 ## Hosting
 
-The built site is a folder of static files, deployed to **Cloudflare
-Workers** using its static assets feature — no server, no adapter, just
+The built site is a folder of static files, deployed to **Cloudflare**
+**Workers** using its static assets feature — no server, no adapter, just
 `wrangler deploy` uploading the `dist/` folder. It's connected to GitHub, so
 pushes to `main` trigger a fresh build and deploy automatically, and it's
 served from a custom domain (`ryanfogle.dev`) instead of the default
@@ -69,7 +71,4 @@ edit content from anywhere without reintroducing a server.
 What made the deployment part actually work smoothly was a set of
 Cloudflare-specific agent skills it had access to — reference docs for
 Workers, Pages, and Wrangler that it could pull from instead of relying
-purely on stale training knowledge. That's what caught the tricky stuff: the
-`pnpm-workspace.yaml` fix, realizing `wrangler deploy` would try to
-auto-configure an SSR adapter I didn't need, and setting up the custom domain
-correctly on the first try instead of trial-and-error against the dashboard.
+purely on stale training knowledge.
