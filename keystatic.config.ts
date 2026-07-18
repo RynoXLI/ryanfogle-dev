@@ -22,10 +22,20 @@ export default config({
         navLinks: fields.array(
           fields.object({
             label: fields.text({ label: 'Label' }),
-            href: fields.text({ label: 'Link (e.g. /blog)' }),
+            href: fields.text({ label: 'Link (e.g. /work)' }),
           }),
           {
             label: 'Navigation links',
+            itemLabel: (props) => props.fields.label.value || 'Link',
+          }
+        ),
+        socialLinks: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Label' }),
+            url: fields.url({ label: 'URL' }),
+          }),
+          {
+            label: 'Social links (footer)',
             itemLabel: (props) => props.fields.label.value || 'Link',
           }
         ),
@@ -38,10 +48,16 @@ export default config({
       schema: {
         heading: fields.text({ label: 'Heading' }),
         intro: fields.text({ label: 'Intro paragraph', multiline: true }),
+        photo: fields.image({
+          label: 'Photo of yourself',
+          validation: { isRequired: false },
+          directory: 'src/content/home/images',
+          publicPath: '/src/content/home/images/',
+        }),
         ctas: fields.array(
           fields.object({
             label: fields.text({ label: 'Label' }),
-            href: fields.text({ label: 'Link (e.g. /cv)' }),
+            href: fields.text({ label: 'Link (e.g. /work)' }),
           }),
           {
             label: 'Call-to-action buttons',
@@ -50,70 +66,13 @@ export default config({
         ),
       },
     }),
-
-    cv: singleton({
-      label: 'CV',
-      path: 'src/content/cv/',
-      schema: {
-        name: fields.text({ label: 'Full name' }),
-        headline: fields.text({ label: 'Headline / job title' }),
-        email: fields.text({ label: 'Email' }),
-        location: fields.text({ label: 'Location' }),
-        summary: fields.text({ label: 'Summary', multiline: true }),
-        links: fields.array(
-          fields.object({
-            label: fields.text({ label: 'Label' }),
-            url: fields.url({ label: 'URL' }),
-          }),
-          {
-            label: 'Links',
-            itemLabel: (props) => props.fields.label.value || 'Link',
-          }
-        ),
-        skills: fields.array(fields.text({ label: 'Skill' }), {
-          label: 'Skills',
-          itemLabel: (props) => props.value || 'Skill',
-        }),
-        experience: fields.array(
-          fields.object({
-            role: fields.text({ label: 'Role' }),
-            company: fields.text({ label: 'Company' }),
-            startDate: fields.date({ label: 'Start date' }),
-            endDate: fields.date({
-              label: 'End date (leave blank if current)',
-              validation: { isRequired: false },
-            }),
-            description: fields.array(fields.text({ label: 'Bullet' }), {
-              label: 'Description bullets',
-              itemLabel: (props) => props.value || 'Bullet',
-            }),
-          }),
-          {
-            label: 'Experience',
-            itemLabel: (props) => `${props.fields.role.value} @ ${props.fields.company.value}`,
-          }
-        ),
-        education: fields.array(
-          fields.object({
-            school: fields.text({ label: 'School' }),
-            degree: fields.text({ label: 'Degree' }),
-            startDate: fields.date({ label: 'Start date', validation: { isRequired: false } }),
-            endDate: fields.date({ label: 'End date', validation: { isRequired: false } }),
-          }),
-          {
-            label: 'Education',
-            itemLabel: (props) => `${props.fields.degree.value} @ ${props.fields.school.value}`,
-          }
-        ),
-      },
-    }),
   },
 
   collections: {
-    blog: collection({
-      label: 'Blog posts',
+    work: collection({
+      label: 'Work',
       slugField: 'title',
-      path: 'src/content/blog/*',
+      path: 'src/content/work/*',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
@@ -123,49 +82,20 @@ export default config({
           label: 'Tags',
           itemLabel: (props) => props.value || 'Tag',
         }),
-        coverImage: fields.image({
-          label: 'Cover image',
-          directory: 'src/content/blog/images',
-          publicPath: '/src/content/blog/images/',
-        }),
-        content: fields.markdoc({
-          label: 'Content',
-          options: {
-            image: {
-              directory: 'src/content/blog/images',
-              publicPath: '/src/content/blog/images/',
-            },
-          },
-        }),
-      },
-    }),
-
-    projects: collection({
-      label: 'Projects',
-      slugField: 'title',
-      path: 'src/content/projects/*',
-      format: { contentField: 'content' },
-      schema: {
-        title: fields.slug({ name: { label: 'Title' } }),
-        description: fields.text({ label: 'Short description', multiline: true }),
-        tags: fields.array(fields.text({ label: 'Tag' }), {
-          label: 'Tech / tags',
-          itemLabel: (props) => props.value || 'Tag',
-        }),
         url: fields.url({ label: 'Live URL', validation: { isRequired: false } }),
         repo: fields.url({ label: 'Repository URL', validation: { isRequired: false } }),
         featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
         coverImage: fields.image({
           label: 'Cover image',
-          directory: 'src/content/projects/images',
-          publicPath: '/src/content/projects/images/',
+          directory: 'src/content/work/images',
+          publicPath: '/src/content/work/images/',
         }),
         content: fields.markdoc({
           label: 'Content',
           options: {
             image: {
-              directory: 'src/content/projects/images',
-              publicPath: '/src/content/projects/images/',
+              directory: 'src/content/work/images',
+              publicPath: '/src/content/work/images/',
             },
           },
         }),

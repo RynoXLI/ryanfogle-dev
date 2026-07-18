@@ -1,12 +1,13 @@
-siteName: "Ryan Fogle"
-defaultDescription: "Personal site, blog, and project portfolio."
-footerText: "Built with Astro & Keystatic."
+siteName: Ryan Fogle
+defaultDescription: Personal site, blog, and project portfolio.
+footerText: Built with Astro & Keystatic.
 navLinks:
   - label: Home
     href: /
-  - label: CV
-    href: /cv
-  - label: Blog
-    href: /blog
-  - label: Projects
-    href: /projects
+  - label: Work
+    href: /work
+socialLinks:
+  - label: GitHub
+    url: https://github.com/RynoXLI
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/ryan-scott-fogle/

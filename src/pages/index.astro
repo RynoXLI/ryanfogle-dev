@@ -12,12 +12,23 @@ const siteName = settingsEntry?.data.siteName ?? 'Ryan Fogle';
 <Layout title={siteName}>
 	<Nav slot="nav" />
 
-	<section class="space-y-6 py-8">
-		<h1 class="font-serif text-4xl font-bold tracking-tight sm:text-5xl">{home?.heading ?? `Hi, I'm Ryan.`}</h1>
+	<section class="space-y-6">
+		<div class="flex flex-row items-center gap-4 sm:gap-5">
+			{
+				home?.photo && (
+					<img
+						src={`/src/content/home/images/${home.photo}`}
+						alt={home?.heading ?? siteName}
+						class="h-16 w-16 shrink-0 rounded-full object-cover ring-1 ring-stone-200 sm:h-24 sm:w-24 dark:ring-stone-800"
+					/>
+				)
+			}
+			<h1 class="font-serif text-3xl font-bold tracking-tight sm:text-5xl">{home?.heading ?? `Hi, I'm Ryan.`}</h1>
+		</div>
 		<p class="max-w-prose text-lg leading-relaxed text-stone-600 dark:text-stone-300">
 			{
 				home?.intro ??
-					`I'm a software engineer and data scientist working on generative AI in production. This is where I write, share projects, and keep an up-to-date record of my work.`
+					`I'm a software engineer and data scientist working on generative AI in production. This is where I share projects and occasional writing.`
 			}
 		</p>
 		<div class="flex flex-wrap gap-3 pt-2">

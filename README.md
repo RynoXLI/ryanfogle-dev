@@ -1,14 +1,14 @@
 # ryfy-cc
 
-Personal website — CV, blog, and projects — built with [Astro](https://astro.build) and edited via [Keystatic](https://keystatic.com), a git-based CMS.
+Personal website — CV and work (writing + projects) — built with [Astro](https://astro.build) and edited via [Keystatic](https://keystatic.com), a git-based CMS.
 
 ## Stack
 
 - **Astro** — static site generation, content collections
 - **Tailwind CSS v4** (+ `@tailwindcss/typography`) — styling
-- **Markdoc** — blog/project post content format
+- **Markdoc** — work entry content format
 - **Keystatic** — CMS admin UI at `/keystatic`, currently in `local` storage mode (reads/writes files directly on disk; no auth required)
-- **@astrojs/node** — server adapter, required so Keystatic's admin UI can run; all public pages (`/`, `/cv`, `/blog/*`, `/projects/*`) are still prerendered to static HTML at build time
+- **@astrojs/node** — server adapter, required so Keystatic's admin UI can run; all public pages (`/`, `/cv`, `/work/*`) are still prerendered to static HTML at build time
 
 ## Development
 
@@ -27,8 +27,7 @@ Content edited through the admin UI is written straight to the files under `src/
 Defined in [`keystatic.config.ts`](keystatic.config.ts) (CMS schema) and [`src/content.config.ts`](src/content.config.ts) (Astro content collections read by pages):
 
 - **CV** (singleton) — `src/content/cv/index.yaml`
-- **Blog** (collection) — `src/content/blog/*.mdoc`
-- **Projects** (collection) — `src/content/projects/*.mdoc`
+- **Work** (collection) — `src/content/work/*.mdoc`, a single content type covering both writing and projects (optional `url`/`repo` fields for project links), shown as one public "Work" section at `/work`
 
 ## Build
 

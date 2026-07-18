@@ -5,9 +5,7 @@ const settingsEntry = await getEntry('settings', 'settings');
 const settings = settingsEntry?.data;
 const links = settings?.navLinks ?? [
 	{ href: '/', label: 'Home' },
-	{ href: '/cv', label: 'CV' },
-	{ href: '/blog', label: 'Blog' },
-	{ href: '/projects', label: 'Projects' },
+	{ href: '/work', label: 'Work' },
 ];
 const siteName = settings?.siteName ?? 'Ryan Fogle';
 

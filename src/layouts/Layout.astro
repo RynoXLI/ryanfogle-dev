@@ -26,12 +26,30 @@ const { title, description = settings?.defaultDescription ?? 'Personal site, blo
 	<body class="min-h-screen bg-stone-50 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
 		<div class="mx-auto flex min-h-screen max-w-2xl flex-col px-6">
 			<slot name="nav" />
-			<main class="flex-1 py-12">
+			<main class="flex flex-1 flex-col justify-center py-12">
 				<slot />
 			</main>
-			<footer class="border-t border-stone-200 py-8 text-xs text-stone-400 dark:border-stone-800 dark:text-stone-500">
-				&copy; {new Date().getFullYear()} {settings?.siteName ?? 'Ryan Fogle'} —{' '}
-				{settings?.footerText ?? 'Built with Astro & Keystatic.'}
+			<footer class="flex flex-wrap items-center justify-between gap-4 border-t border-stone-200 py-8 text-xs text-stone-400 dark:border-stone-800 dark:text-stone-500">
+				<p>
+					&copy; {new Date().getFullYear()} {settings?.siteName ?? 'Ryan Fogle'} —{' '}
+					{settings?.footerText ?? 'Built with Astro & Keystatic.'}
+				</p>
+				<ul class="flex flex-wrap gap-4">
+					{
+						(settings?.socialLinks ?? []).map((link) => (
+							<li>
+								<a class="transition-colors hover:text-accent" href={link.url}>
+									{link.label}
+								</a>
+							</li>
+						))
+					}
+					<li>
+						<a class="transition-colors hover:text-accent" href="/resume.pdf">
+							Resume (PDF)
+						</a>
+					</li>
+				</ul>
 			</footer>
 		</div>
 	</body>
