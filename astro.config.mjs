@@ -7,7 +7,13 @@ import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 
-import node from '@astrojs/node';
+// Keystatic uses `storage: { kind: 'local' }` (see keystatic.config.ts), which
+// edits content files directly on disk. That only makes sense when running
+// `astro dev` locally — it can't write files on a static host like Cloudflare
+// Pages, and previously caused filesystem-sandboxing failures when deployed
+// with an SSR adapter. So the /keystatic admin UI is only included in dev;
+// production builds are 100% static (no adapter needed at all).
+const isDev = process.env.NODE_ENV !== 'production';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,9 +21,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  adapter: node({ mode: 'standalone' }),
-
-  // The Keystatic admin UI (/keystatic) is server-rendered; the rest of the
-  // site's pages are still prerendered to static HTML by default.
-  integrations: [react(), markdoc(), keystatic()]
+  integrations: [react(), markdoc(), ...(isDev ? [keystatic()] : [])]
 });
