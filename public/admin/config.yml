@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: RynoXLI/ryanfogle-dev
+  branch: main
+  base_url: https://ryanfogle-cms-auth.ryno-dyno-xyz.workers.dev
+
+site_url: https://ryanfogle.dev
+
+media_folder: /public/media
+public_folder: /media
+
+collections:
+  - name: home
+    label: Home Page
+    files:
+      - name: home
+        label: Home
+        file: src/content/home/index.yaml
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - { label: Intro, name: intro, widget: text }
+          - { label: Photo, name: photo, widget: image, required: false }
+          - label: Call-to-action buttons
+            name: ctas
+            widget: list
+            label_singular: Button
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: 'Link (e.g. /work)', name: href, widget: string }
+
+  - name: settings
+    label: Site Settings
+    files:
+      - name: settings
+        label: Settings
+        file: src/content/settings/index.yaml
+        fields:
+          - { label: Site name, name: siteName, widget: string }
+          - { label: Default meta description, name: defaultDescription, widget: text }
+          - { label: Footer text, name: footerText, widget: string }
+          - label: Navigation links
+            name: navLinks
+            widget: list
+            label_singular: Link
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: 'Link (e.g. /work)', name: href, widget: string }
+          - label: Social links (footer)
+            name: socialLinks
+            widget: list
+            label_singular: Link
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: url, widget: string }
+
+  - name: work
+    label: Work
+    folder: src/content/work
+    create: true
+    slug: '{{slug}}'
+    extension: mdoc
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Published date, name: publishedDate, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Live URL, name: url, widget: string, required: false }
+      - { label: Repository URL, name: repo, widget: string, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Cover image, name: coverImage, widget: image, required: false }
+      - { label: Content, name: body, widget: markdown }

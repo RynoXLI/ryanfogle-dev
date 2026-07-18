@@ -1,10 +1,10 @@
 ---
 title: This site
-description: How this site is built — Astro, Keystatic, Tailwind, and a Cloudflare Workers deploy with a few surprises along the way.
+description: How this site is built — Astro, Sveltia CMS, Tailwind, and a Cloudflare Workers deploy with a few surprises along the way.
 publishedDate: 2026-07-18
 tags:
   - astro
-  - keystatic
+  - sveltia-cms
   - typescript
   - cloudflare
 featured: true
@@ -20,10 +20,10 @@ run. Here's how it's put together.
 - **[Astro](https://astro.build)** for static site generation. There's no
   server-side rendering here — every page is built to plain HTML at build
   time, which keeps things fast and simple to host.
-- **[Keystatic](https://keystatic.com)** as a git-based CMS. Content (this
-  post included) is stored as YAML and Markdoc files right in the repo — no
-  database, no admin backend to maintain. The `/keystatic` editor is only
-  available in local dev; production builds never touch the filesystem.
+- **[Sveltia CMS](https://sveltiacms.app)** as a git-based CMS. It's a single
+  static admin page (`/admin`) that talks to the GitHub API directly, so I
+  can edit content — this post included — from any browser, on any device,
+  with changes committed straight to the repo. No server, no database.
 - **Tailwind CSS v4** for styling, with the typography plugin handling the
   prose styling you're reading right now.
 - **TypeScript** throughout, including typed content collections defined in
@@ -60,9 +60,11 @@ anything — just a `git push` and the site rebuilds and redeploys itself.
 
 I built this site pairing with **Claude Sonnet 5** in an agentic coding
 setup — I chose the stack and made the architectural calls, and Claude
-handled most of the implementation: scaffolding the Astro/Keystatic/Tailwind
-setup, writing the content collections and pages, and working through the
-Cloudflare Workers deployment, custom domain and all.
+handled most of the implementation: scaffolding the Astro/Tailwind setup,
+writing the content collections and pages, and working through the
+Cloudflare Workers deployment, custom domain and all. It also handled
+migrating the CMS from Keystatic to Sveltia CMS once I decided I wanted to
+edit content from anywhere without reintroducing a server.
 
 What made the deployment part actually work smoothly was a set of
 Cloudflare-specific agent skills it had access to — reference docs for

@@ -1,6 +1,6 @@
 siteName: Ryan Fogle
 defaultDescription: Personal site, blog, and project portfolio.
-footerText: Built with Astro & Keystatic.
+footerText: Built with Astro.
 navLinks:
   - label: Home
     href: /

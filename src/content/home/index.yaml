@@ -2,7 +2,7 @@ heading: "Hi, I'm Ryan."
 intro: >-
   I'm a software engineer and data scientist working on generative AI in
   production. This is where I share projects and occasional writing.
-photo: ryan-fogle.jpg
+photo: /media/ryan-fogle.jpg
 ctas:
   - label: See my work
     href: /work
