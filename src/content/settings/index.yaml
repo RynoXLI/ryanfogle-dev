@@ -6,8 +6,4 @@ navLinks:
     href: /
   - label: Work
     href: /work
-socialLinks:
-  - label: GitHub
-    url: https://github.com/RynoXLI
-  - label: LinkedIn
-    url: https://www.linkedin.com/in/ryan-scott-fogle/
+socialLinks: []
