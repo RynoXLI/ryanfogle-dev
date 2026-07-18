@@ -1,4 +1,4 @@
-# ryfy-cc
+# ryanfogle-dev
 
 Personal website — CV and work (writing + projects) — built with [Astro](https://astro.build) and edited via [Keystatic](https://keystatic.com), a git-based CMS.
 
