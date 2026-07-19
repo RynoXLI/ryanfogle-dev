@@ -1,14 +1,13 @@
 # ryanfogle-dev
 
-Personal website — CV and work (writing + projects) — built with [Astro](https://astro.build) and edited via [Keystatic](https://keystatic.com), a git-based CMS.
+Personal website — home page, work/writing entries — built with [Astro](https://astro.build) and edited via [Sveltia CMS](https://sveltiacms.app), a git-based CMS.
 
 ## Stack
 
-- **Astro** — static site generation, content collections
+- **Astro** — static site generation, content collections. No SSR adapter — every page is prerendered to plain HTML at build time.
 - **Tailwind CSS v4** (+ `@tailwindcss/typography`) — styling
-- **Markdoc** — work entry content format
-- **Keystatic** — CMS admin UI at `/keystatic`, currently in `local` storage mode (reads/writes files directly on disk; no auth required)
-- **@astrojs/node** — server adapter, required so Keystatic's admin UI can run; all public pages (`/`, `/cv`, `/work/*`) are still prerendered to static HTML at build time
+- **Sveltia CMS** — CMS admin UI at `/admin`, a static single-page app that talks to the GitHub API directly. Authentication goes through a small, separately-deployed Cloudflare Worker ([`sveltia-cms-auth`](https://github.com/sveltia/sveltia-cms-auth)) since GitHub's OAuth token exchange needs a confidential client. See [`public/admin/config.yml`](public/admin/config.yml) for the CMS schema.
+- **Cloudflare Workers** (static assets) — hosting, with `ryanfogle.dev` as a custom domain. See [`wrangler.jsonc`](wrangler.jsonc).
 
 ## Development
 
@@ -18,16 +17,19 @@ pnpm dev
 ```
 
 - Site: http://localhost:4321
-- CMS admin: http://localhost:4321/keystatic
+- CMS admin: http://localhost:4321/admin (local dev uses the "Sign In Using Access Token" or "Work with Local Repository" options; GitHub OAuth sign-in only works on the production domain, since the auth worker's `ALLOWED_DOMAINS` is scoped to `ryanfogle.dev`)
 
-Content edited through the admin UI is written straight to the files under `src/content/`. Commit those changes like any other source file.
+Content edited through the admin UI is committed straight to this repo via the GitHub API. Content edited locally is just regular files under `src/content/` — commit those like any other source file.
 
 ## Content model
 
-Defined in [`keystatic.config.ts`](keystatic.config.ts) (CMS schema) and [`src/content.config.ts`](src/content.config.ts) (Astro content collections read by pages):
+Defined in [`src/content.config.ts`](src/content.config.ts) (Astro content collections) and mirrored in [`public/admin/config.yml`](public/admin/config.yml) (Sveltia CMS schema):
 
-- **CV** (singleton) — `src/content/cv/index.yaml`
-- **Work** (collection) — `src/content/work/*.mdoc`, a single content type covering both writing and projects (optional `url`/`repo` fields for project links), shown as one public "Work" section at `/work`
+- **Home** (singleton) — `src/content/home/index.yaml` — heading, intro, photo, CTA buttons
+- **Settings** (singleton) — `src/content/settings/index.yaml` — site name, meta description, footer text, nav/social links
+- **Work** (collection) — `src/content/work/*.md` — plain Markdown with YAML frontmatter, covering both writing and projects (optional `url`/`repo` fields), shown at `/work`
+
+Media uploaded through the CMS is stored in `public/media/`.
 
 ## Build
 
@@ -36,7 +38,7 @@ pnpm build
 pnpm preview
 ```
 
-`pnpm build` produces a hybrid output in `dist/`: prerendered static HTML for all public pages, plus a small Node server (`dist/server/`) that serves the Keystatic admin routes. Run it with `node dist/server/entry.mjs`, or `pnpm preview` for a quick local check.
+`pnpm build` produces a fully static `dist/` — no server required.
 
 ## Type checking
 
@@ -46,8 +48,20 @@ pnpm astro check
 
 TypeScript is pinned to `^6` — TypeScript 7 removed APIs that `@astrojs/check` currently depends on.
 
-## Deployment notes
+## Deployment
 
-- Keystatic is currently in **local** storage mode, meant for editing on your own machine before committing. It is not intended to be exposed publicly as-is.
-- Moving to **GitHub** storage mode (so the admin UI can be used from anywhere, with GitHub-backed auth) requires creating a GitHub App and setting `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, and `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` env vars — see the [Keystatic GitHub mode docs](https://keystatic.com/docs/github-model).
-- The Cloudflare adapter (`@astrojs/cloudflare`) was evaluated but dropped: its workerd-based dev/build simulation broke both direct filesystem reads and Keystatic's admin UI bundle. `@astrojs/node` does not have this problem. If deploying to Cloudflare is still a goal, revisit this with a plain static export (no adapter, admin UI disabled in production) or check for updated adapter compatibility.
+Deployed to Cloudflare Workers (static assets, no adapter needed) via `wrangler deploy`, with automatic builds/deploys on push to `main` through Cloudflare's Git integration.
+
+```sh
+wrangler deploy
+```
+
+### CMS authentication
+
+The GitHub OAuth flow for Sveltia CMS is handled by a separate, standalone Cloudflare Worker deployed from [sveltia/sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) (not part of this repo). It requires:
+
+- A GitHub OAuth App with its callback URL pointing at that worker (`<worker-url>/callback`)
+- `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` set as Worker secrets (`wrangler secret put`, not `.env` — Workers don't read `.env` files)
+- `ALLOWED_DOMAINS` set to restrict which site origin can use it
+
+Only accounts with GitHub write/collaborator access to this repo can actually save changes through the CMS, regardless of the repo's public/private visibility.
