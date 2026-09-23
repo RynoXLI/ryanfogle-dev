@@ -1,7 +1,7 @@
 ---
 title: Japan Trip — 2023
 summary: A practical 18-day Japan travel guide covering transit, packing, city recommendations, and the route I took through Tokyo, Osaka, Kyoto, and Hiroshima.
-publishedDate: 2023-12-01
+publishedDate: December 2023
 tags:
   - travel
   - japan

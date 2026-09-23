@@ -33,7 +33,7 @@ const journal = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    publishedDate: z.coerce.date(),
+    publishedDate: z.string(),
     tags: z.array(z.string()).default([]),
   }),
 });
