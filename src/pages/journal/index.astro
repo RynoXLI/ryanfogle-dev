@@ -11,11 +11,14 @@ const entries = (await getCollection('journal')).sort(
 <Layout title="Journal">
 	<Nav slot="nav" />
 
-	<ul class="divide-y divide-stone-200 dark:divide-stone-800">
+	<ul class="space-y-6">
 		{
 			entries.map((entry) => (
-				<li class="py-8 first:pt-0">
-					<a href={`/journal/${entry.id}`} class="group block">
+				<li>
+					<a
+						href={`/journal/${entry.id}`}
+						class="group block rounded-2xl border border-stone-200 bg-stone-50 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-sm dark:border-stone-800 dark:bg-stone-900/40 dark:hover:border-stone-700"
+					>
 						<span class="font-serif text-2xl font-semibold transition-colors group-hover:text-accent">
 							{entry.data.title}
 						</span>

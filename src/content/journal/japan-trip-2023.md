@@ -8,6 +8,8 @@ tags:
   - guide
 ---
 
+Originally published on Medium: [Japan Trip — 2023](https://ryanfogle.medium.com/japan-trip-2023-72089069deb3)
+
 More recently I took a long 18-day vacation to Japan in December 2023. Multiple friends asked me for trip recommendations, so in the interest of saving time and sharing, I decided to make this post for anyone interested in traveling to Japan.
 
 I am, by no means, a Japan travel expert. When I came to Japan I had little information. If you’re worried or overwhelmed by planning a trip, I promise you there are ample things to do in Japan, and the most fun experience is just walking around and exploring different areas.
