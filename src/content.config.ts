@@ -28,6 +28,16 @@ const home = defineCollection({
   }),
 });
 
+const journal = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/journal' }),
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    publishedDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 const work = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/work' }),
   schema: z.object({
@@ -42,4 +52,4 @@ const work = defineCollection({
   }),
 });
 
-export const collections = { settings, home, work };
+export const collections = { settings, home, journal, work };

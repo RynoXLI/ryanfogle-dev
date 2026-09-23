@@ -4,6 +4,8 @@ footerText: Built with Astro.
 navLinks:
   - label: Home
     href: /
+  - label: Journal
+    href: /journal
   - label: Work
     href: /work
 socialLinks: []
